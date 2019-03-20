@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,11 +24,19 @@ public class MainActivity extends AppCompatActivity {
     int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 0;
     public static boolean ACCESS_GRANTED;
 
+    DatabaseHelper mDatabaseHelper;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         listView = findViewById(R.id.listView);
+
+        mDatabaseHelper = new DatabaseHelper(this);
+
+
     }
 
     public void onButtonClick(View view) {
@@ -95,6 +104,28 @@ public class MainActivity extends AppCompatActivity {
 
         myListViewLayoutAdapter adapter = new myListViewLayoutAdapter(getApplicationContext(), R.layout.my_listview_layout, contacts);
         listView.setAdapter(adapter);
+
+        for(Contact c : contacts){
+            AddData(c.getContact_name(),c.getContact_TelefonNr());
+        }
+    }
+
+    public void AddData(String name,String number) {
+        boolean insertData = mDatabaseHelper.addData(name,number);
+
+        if (insertData) {
+            toastMessage("Data Successfully Inserted!");
+        } else {
+            toastMessage("Something went wrong");
+        }
+    }
+
+    /**
+     * customizable toast
+     * @param message
+     */
+    private void toastMessage(String message){
+        Toast.makeText(this,message, Toast.LENGTH_SHORT).show();
     }
 }
 
