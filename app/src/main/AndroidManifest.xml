@@ -2,14 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="vhoerzi16.main">
 
-    <uses-permission android:name="android.permission.READ_CONTACTS"></uses-permission>
-    <uses-permission android:name="android.permission.WRITE_CONTACTS"></uses-permission>
-
-    <uses-permission android:name="android.permission.READ_CALENDAR"></uses-permission>
-    <uses-permission android:name="android.permission.WRITE_CALENDAR"></uses-permission>
-
-
-
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
         android:allowBackup="true"
